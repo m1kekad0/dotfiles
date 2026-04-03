@@ -6,16 +6,21 @@ WezTerm のカスタム設定ファイルです。
 
 ```
 wezterm/
-└── wezterm.lua   # メイン設定ファイル
+└── .config/
+    └── wezterm/
+        └── wezterm.lua   # メイン設定ファイル
 ```
 
 ## セットアップ
 
-`wezterm.lua` を WezTerm の設定ディレクトリにシンボリックリンクを貼ります。
+GNU Stow でシンボリックリンクを展開します。
 
 ```bash
-ln -sf ~/dotfiles/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
+# dotfiles ディレクトリで実行
+stow -t ~ wezterm
 ```
+
+展開後のリンク先: `~/.config/wezterm/wezterm.lua`
 
 ## 設定内容
 
