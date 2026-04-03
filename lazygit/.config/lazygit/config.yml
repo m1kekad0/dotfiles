@@ -1,0 +1,57 @@
+# lazygit 設定ファイル
+# 参考: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+gui:
+  # ステータスパネルの幅（割合）
+  sidePanelWidth: 0.3
+  # コミットメッセージの表示幅
+  commitLength:
+    show: true
+  # マウス操作を有効化
+  mouseEvents: true
+  # ウィンドウサイズ変更の閾値
+  expandFocusedSidePanel: true
+  # テーマ設定（Catppuccin Mocha）
+  theme:
+    activeBorderColor:
+      - '#cba6f7'   # lavender: アクティブパネルの枠線
+      - bold
+    inactiveBorderColor:
+      - '#585b70'   # overlay0: 非アクティブパネルの枠線
+    searchingActiveBorderColor:
+      - '#f9e2af'   # yellow: 検索中の枠線
+      - bold
+    optionsTextColor:
+      - '#89b4fa'   # blue: オプションテキスト
+    selectedLineBgColor:
+      - '#313244'   # surface0: 選択行の背景
+    selectedRangeBgColor:
+      - '#45475a'   # surface1: 選択範囲の背景
+    cherryPickedCommitBgColor:
+      - '#45475a'   # surface1
+    cherryPickedCommitFgColor:
+      - '#cba6f7'   # lavender
+    unstagedChangesColor:
+      - '#f38ba8'   # red: 未ステージ変更
+    defaultFgColor:
+      - '#cdd6f4'   # text: デフォルトテキスト
+
+git:
+  # delta をページャーとして使用
+  paging:
+    colorArg: always
+    pager: delta --paging=never
+  # コミット作成時のサイン設定
+  commit:
+    signOff: false
+  # ブランチ操作
+  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
+
+os:
+  # エディタ設定
+  editPreset: nvim
+
+keybinding:
+  universal:
+    # ヘルプを表示
+    openRecentRepos: '<c-r>'
