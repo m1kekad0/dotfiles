@@ -14,7 +14,7 @@ local config = wezterm.config_builder()
 config.color_scheme = "Catppuccin Mocha"
 
 -- フォント設定
-config.font = wezterm.font("HackGenConsole", { weight = "Regular" })
+config.font = wezterm.font("HackGen Console", { weight = "Regular" })
 config.font_size = 14.0
 
 -- ウィンドウ設定
