@@ -44,6 +44,19 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="$HOME/.local/bin:$PATH"
 
+# ─── エイリアス ───────────────────────────────────────────────────────────────
+
+# eza: ls の代替（アイコン・カラー・git 連携）
+alias ls='eza --icons'
+alias ll='eza --icons -la --git'
+alias lt='eza --icons --tree --level=2'
+
+# bat: cat の代替（シンタックスハイライト）
+alias cat='bat --style=plain'
+
+# lazygit
+alias lg='lazygit'
+
 # ─── プロンプト ────────────────────────────────────────────────────────────────
 
 # Powerlevel10k 設定ファイルを読み込む（p10k configure で生成）
