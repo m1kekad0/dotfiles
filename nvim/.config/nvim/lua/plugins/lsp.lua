@@ -181,33 +181,36 @@ return {
 
   -- ==========================================================================
   -- シンタックスハイライト: nvim-treesitter
+  -- 新バージョン（rewrite）では lazy loading 非対応のため lazy = false で起動
   -- ==========================================================================
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      -- 自動インストールするパーサー
-      ensure_installed = {
+    -- 新バージョンは lazy loading を公式にサポートしない
+    lazy = false,
+    config = function()
+      -- パーサーのインストール（非同期）
+      require("nvim-treesitter").install({
         "bash", "c", "go", "html", "javascript", "json",
         "lua", "markdown", "python", "rust", "tsx",
         "typescript", "vim", "yaml",
-      },
-      highlight = { enable = true },
-      indent = { enable = true },
-      -- テキストオブジェクトの拡張
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
+      })
+
+      -- ハイライト・インデントを FileType イベントで有効化
+      -- Neovim 組み込みの treesitter API を使用する
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "bash", "c", "go", "html", "javascript", "json",
+          "lua", "markdown", "python", "rust", "tsx",
+          "typescript", "vim", "yaml",
         },
-      },
-    },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+        callback = function()
+          -- シンタックスハイライトを有効化
+          vim.treesitter.start()
+          -- treesitter ベースのインデントを有効化
+          vim.wo.indentexpr = "v:lua.vim.treesitter.foldexpr()"
+        end,
+      })
     end,
   },
 }
