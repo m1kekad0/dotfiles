@@ -7,30 +7,59 @@ m1kekad0 の個人用 dotfiles を管理するリポジトリです。
 各種ツール・シェルの設定ファイル（dotfiles）を一元管理します。
 シンボリックリンクを使ってホームディレクトリに展開することを想定しています。
 
-## ディレクトリ構成（予定）
+## シンボリックリンク管理
+
+**GNU Stow** を使用してシンボリックリンクを管理する。
+
+```bash
+# 全パッケージを一括で展開
+stow -t ~ */
+
+# 特定パッケージのみ展開
+stow -t ~ nvim
+
+# リンクを削除（アンストール）
+stow -t ~ -D nvim
+```
+
+## ディレクトリ構成
+
+GNU Stow のターゲットは `~`（ホームディレクトリ）とする。
+各パッケージディレクトリ内は、ホームディレクトリからの**相対パスをそのまま再現**する。
+
+- `~/.config/` 配下に展開するアプリは `<package>/.config/<app>/` に配置する
+- `~/` 直下に展開するファイル（`.zshrc` 等）は `<package>/` 直下に配置する
 
 ```
 dotfiles/
 ├── CLAUDE.md
 ├── README.md
-├── install.sh          # セットアップスクリプト
-├── wezterm/            # WezTerm 設定
-│   └── wezterm.lua
-├── zsh/                # Zsh 設定
-│   ├── .zshrc
-│   └── .zshenv
-├── git/                # Git 設定
-│   ├── .gitconfig
-│   └── .gitignore_global
-├── vim/                # Vim / Neovim 設定
-│   └── .vimrc
-└── tmux/               # tmux 設定
-    └── .tmux.conf
+├── install.sh               # セットアップスクリプト（stow を実行）
+├── nvim/                    # Neovim 設定パッケージ
+│   └── .config/
+│       └── nvim/            # → ~/.config/nvim/ にリンク
+│           ├── init.lua
+│           └── lua/
+├── wezterm/                 # WezTerm 設定パッケージ
+│   └── .config/
+│       └── wezterm/         # → ~/.config/wezterm/ にリンク
+│           └── wezterm.lua
+├── zsh/                     # Zsh 設定パッケージ
+│   ├── .zshrc               # → ~/.zshrc にリンク
+│   └── .zshenv              # → ~/.zshenv にリンク
+├── git/                     # Git 設定パッケージ
+│   ├── .gitconfig           # → ~/.gitconfig にリンク
+│   └── .gitignore_global    # → ~/.gitignore_global にリンク
+└── tmux/                    # tmux 設定パッケージ
+    └── .config/
+        └── tmux/            # → ~/.config/tmux/ にリンク
+            └── tmux.conf
 ```
 
 ## 作業ルール
 
 - 設定ファイルを追加・変更した場合は、`README.md` のセットアップ手順も合わせて更新すること
+- 新しいアプリの設定を追加する際は、展開先（`~/` か `~/.config/` か）を確認してからディレクトリを作成すること
 - シェルスクリプトには実行権限を付与すること（`chmod +x`）
 - 機密情報（トークン・パスワード等）は絶対にコミットしないこと
 - OS 固有の設定は `darwin/` や `linux/` などのサブディレクトリで分離すること
