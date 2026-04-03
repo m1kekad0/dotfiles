@@ -15,7 +15,11 @@ config.color_scheme = "Catppuccin Mocha"
 
 -- フォント設定
 config.font = wezterm.font("HackGen Console", { weight = "Regular" })
-config.font_size = 14.0
+config.font_size = 16.0
+
+-- 初期ウィンドウサイズ（メインディスプレイ 1710×1112 の 1/4 を目安に設定）
+config.initial_cols = 100
+config.initial_rows = 25
 
 -- ウィンドウ設定
 config.window_padding = {
