@@ -205,10 +205,12 @@ return {
           "typescript", "vim", "yaml",
         },
         callback = function()
-          -- シンタックスハイライトを有効化
-          vim.treesitter.start()
-          -- treesitter ベースのインデントを有効化
-          vim.wo.indentexpr = "v:lua.vim.treesitter.foldexpr()"
+          -- パーサー未インストール時はエラーを無視して有効化を試みる
+          local ok = pcall(vim.treesitter.start)
+          if ok then
+            -- treesitter ベースのインデントを有効化
+            vim.wo.indentexpr = "v:lua.vim.treesitter.foldexpr()"
+          end
         end,
       })
     end,
