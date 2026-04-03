@@ -6,24 +6,29 @@ lazy.nvim をベースにした Neovim 設定です。
 
 ```
 nvim/
-├── init.lua                  # エントリポイント・lazy.nvim のブートストラップ
-└── lua/
-    ├── config/
-    │   ├── options.lua       # 基本オプション設定
-    │   └── keymaps.lua       # キーマップ設定
-    └── plugins/
-        ├── ui.lua            # UI 系プラグイン
-        ├── editor.lua        # エディタ機能系プラグイン
-        └── lsp.lua           # LSP・補完・シンタックス系プラグイン
+└── .config/
+    └── nvim/                 # → ~/.config/nvim/ にリンク
+        ├── init.lua          # エントリポイント・lazy.nvim のブートストラップ
+        └── lua/
+            ├── config/
+            │   ├── options.lua       # 基本オプション設定
+            │   └── keymaps.lua       # キーマップ設定
+            └── plugins/
+                ├── ui.lua            # UI 系プラグイン
+                ├── editor.lua        # エディタ機能系プラグイン
+                └── lsp.lua           # LSP・補完・シンタックス系プラグイン
 ```
 
 ## セットアップ
 
-`nvim/` を Neovim の設定ディレクトリにシンボリックリンクを貼ります。
+GNU Stow でシンボリックリンクを展開します。
 
 ```bash
-ln -sf ~/dotfiles/nvim ~/.config/nvim
+# dotfiles ディレクトリで実行
+stow -t ~ nvim
 ```
+
+展開後のリンク先: `~/.config/nvim/`
 
 初回起動時に lazy.nvim が自動でインストールされ、プラグインのダウンロードが始まります。
 
