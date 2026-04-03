@@ -1,0 +1,54 @@
+# Git グローバル設定ファイル
+
+[user]
+	# コミット時のユーザー情報
+	name = "m1kekad0"
+	email = m1kekad0@icloud.com
+
+[core]
+	# デフォルトエディタ
+	editor = nvim
+	# グローバル gitignore ファイルのパス
+	excludesfile = ~/.gitignore_global
+	# 改行コードの自動変換（macOS/Linux では input を推奨）
+	autocrlf = input
+	# diff ページャーとして delta を使用
+	pager = delta
+
+[delta]
+	# セクション間のナビゲーションを有効化
+	navigate = true
+	# 行番号を表示
+	line-numbers = true
+	# 左右に並べて差分表示
+	side-by-side = true
+
+[merge]
+	# zdiff3 形式でコンフリクトを表示（共通祖先も表示）
+	conflictstyle = zdiff3
+
+[diff]
+	# 移動したコードをカラーで区別
+	colorMoved = default
+
+[pull]
+	# pull 時はデフォルトで rebase する
+	rebase = true
+
+[push]
+	# リモートブランチを自動セットアップ（git push だけで済む）
+	autoSetupRemote = true
+
+[init]
+	# 新規リポジトリのデフォルトブランチ名
+	defaultBranch = main
+
+[alias]
+	# グラフ付きのコンパクトなログ表示
+	lg = log --oneline --graph --decorate --all
+	# 短縮形のステータス表示
+	st = status -s
+	# checkout の短縮エイリアス
+	co = checkout
+	# branch の短縮エイリアス
+	br = branch
