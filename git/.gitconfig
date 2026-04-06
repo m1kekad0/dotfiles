@@ -1,9 +1,11 @@
 # Git グローバル設定ファイル
 
+[include]
+  path = ~/.gitconfig.local
+
 [user]
 	# コミット時のユーザー情報
-	name = "m1kekad0"
-	email = m1kekad0.tech@gmail.com
+	# ~/.gitconfig.local 参照
 
 [core]
 	# デフォルトエディタ
