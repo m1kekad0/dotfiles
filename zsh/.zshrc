@@ -31,7 +31,6 @@ plugins=(
   golang                   # Go 補完
   ruby                     # Ruby 補完
   rails                    # Rails 補完
-  you-should-use           # エイリアスの使用を促す
   zsh-completions          # 追加補完定義
   zsh-autosuggestions      # 入力履歴からの自動サジェスト
   zsh-syntax-highlighting  # コマンドのシンタックスハイライト
