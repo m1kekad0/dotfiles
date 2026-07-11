@@ -19,6 +19,16 @@ m1kekad0 の個人用 dotfiles リポジトリです。
 > **Note**: AI コーディングエージェント関連の設定（Claude Code・共通ルール `AGENTS.md` 等）は
 > [ai-agent-config](https://github.com/m1kekad0/ai-agent-config) リポジトリへ分離しました。
 
+### 既存の Powerlevel10k 設定の移行
+
+すでに `~/.p10k.zsh` がある場合は、Stow で `zsh` パッケージを展開する前に内容を確認して退避してください。
+退避後は、このリポジトリの設定との差分を確認し、端末固有の値だけを移行します。
+
+```bash
+mv ~/.p10k.zsh ~/.p10k.zsh.backup
+stow -t ~ zsh
+```
+
 ## セットアップ
 
 ### 前提条件
