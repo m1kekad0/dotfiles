@@ -13,13 +13,31 @@ m1kekad0 の個人用 dotfiles リポジトリです。
 |---|---|---|
 | `nvim/` | `~/.config/nvim/` | Neovim 設定（lazy.nvim / LSP / treesitter） |
 | `wezterm/` | `~/.config/wezterm/` | WezTerm 設定（カラースキーム・フォント・キーバインド） |
-| `zsh/` | `~/` | Zsh 設定（`.zshrc`・`.zshenv`、Oh My Zsh / Powerlevel10k） |
+| `zsh/` | `~/` | Zsh 設定（`.zshrc`・`.zshenv`・`.p10k.zsh`、Oh My Zsh / Powerlevel10k） |
 | `git/` | `~/` | Git 設定（`.gitconfig`・`.gitignore_global`） |
 | `homebrew/` | `~/Brewfile` | Homebrew Bundle で管理する開発ツール・GUI アプリ・フォント |
 | `mise/` | `~/.config/mise/` | mise のグローバルなランタイム設定 |
 
 > **Note**: AI コーディングエージェント関連の設定（Claude Code・共通ルール `AGENTS.md` 等）は
 > [ai-agent-config](https://github.com/m1kekad0/ai-agent-config) リポジトリへ分離しました。
+
+### 既存の Powerlevel10k 設定の移行
+
+既存の Zsh 設定を Stow 管理へ移行する場合は、`~/.p10k.zsh` だけでなく `~/.zshrc` と
+`~/.zshenv` も競合します。通常ファイルだけを退避してから展開してください。すでに `zsh`
+パッケージを Stow で展開済みの場合も、通常ファイルの `~/.p10k.zsh` を退避してから再度
+`stow -t ~ zsh` を実行する必要があります。既存のシンボリックリンクはそのまま保持されます。
+
+```bash
+mkdir -p ~/.dotfiles-backup
+backup_dir="$(mktemp -d "$HOME/.dotfiles-backup/zsh.XXXXXX")"
+for file in .zshrc .zshenv .p10k.zsh; do
+  [[ -e "$HOME/$file" && ! -L "$HOME/$file" ]] && mv "$HOME/$file" "$backup_dir/$file"
+done
+stow -t ~ zsh
+```
+
+展開後は退避した設定とこのリポジトリの設定との差分を確認し、端末固有の値だけを移行します。
 
 ## セットアップ
 
@@ -100,6 +118,7 @@ dotfiles/
 ├── zsh/
 │   ├── .zshrc                 # → ~/.zshrc
 │   ├── .zshenv                # → ~/.zshenv
+│   ├── .p10k.zsh              # → ~/.p10k.zsh
 │   └── .zshrc.local.example   # → ~/.zshrc.local.example
 ├── mise/
 │   └── .config/mise/          # → ~/.config/mise/
