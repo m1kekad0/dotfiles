@@ -45,6 +45,15 @@ stow -t ~ nvim
 stow -t ~ zsh
 ```
 
+### 端末固有の Zsh 設定
+
+トークンや端末ごとの PATH は Git 管理せず、`~/.zshrc.local` に定義します。初回のみ、
+Stow で展開された `~/.zshrc.local.example` をコピーして作成してください。
+
+```bash
+cp ~/.zshrc.local.example ~/.zshrc.local
+```
+
 ### アンインストール
 
 ```bash
@@ -69,7 +78,8 @@ dotfiles/
 │       └── wezterm.lua
 ├── zsh/
 │   ├── .zshrc                 # → ~/.zshrc
-│   └── .zshenv                # → ~/.zshenv
+│   ├── .zshenv                # → ~/.zshenv
+│   └── .zshrc.local.example   # → ~/.zshrc.local.example
 ├── git/
 │   ├── .gitconfig             # → ~/.gitconfig
 │   └── .gitignore_global      # → ~/.gitignore_global
