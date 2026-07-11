@@ -16,12 +16,27 @@
     "type": "command",
     "command": "bash $HOME/.claude/statusline-command.sh"
   },
+  "enabledPlugins": {
+    "codex@openai-codex": true,
+    "vercel@claude-plugins-official": true
+  },
   "extraKnownMarketplaces": {
     "kuu-marketplace": {
       "source": {
         "source": "github",
         "repo": "fumiya-kume/claude-code"
       }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
     }
-  }
+  },
+  "tui": "fullscreen",
+  "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "model": "claude-fable-5"
 }
