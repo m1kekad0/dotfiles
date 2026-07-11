@@ -15,7 +15,9 @@ m1kekad0 の個人用 dotfiles リポジトリです。
 | `wezterm/` | `~/.config/wezterm/` | WezTerm 設定（カラースキーム・フォント・キーバインド） |
 | `zsh/` | `~/` | Zsh 設定（`.zshrc`・`.zshenv`、Oh My Zsh / Powerlevel10k） |
 | `git/` | `~/` | Git 設定（`.gitconfig`・`.gitignore_global`） |
-| `claude/` | `~/.claude/` | Claude Code 設定（グローバル指示・hooks・カスタムコマンド） |
+
+> **Note**: AI コーディングエージェント関連の設定（Claude Code・共通ルール `AGENTS.md` 等）は
+> [ai-agent-config](https://github.com/m1kekad0/ai-agent-config) リポジトリへ分離しました。
 
 ## セットアップ
 
@@ -32,8 +34,8 @@ brew install stow
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/m1kekad0/dotfiles.git ~/dotfiles
-cd ~/dotfiles
+git clone https://github.com/m1kekad0/dotfiles.git ~/github.com/m1kekad0/dotfiles
+cd ~/github.com/m1kekad0/dotfiles
 
 # 全パッケージを一括展開
 stow -t ~ */
@@ -71,13 +73,9 @@ dotfiles/
 ├── git/
 │   ├── .gitconfig             # → ~/.gitconfig
 │   └── .gitignore_global      # → ~/.gitignore_global
-└── claude/
-    └── .claude/               # → ~/.claude/
-        ├── CLAUDE.md
-        ├── settings.json
-        ├── statusline-command.sh
-        ├── statusline-line2.py
-        └── commands/
+└── lazygit/
+    └── .config/lazygit/       # → ~/.config/lazygit/
+        └── config.yml
 ```
 
 ## 作業ルール

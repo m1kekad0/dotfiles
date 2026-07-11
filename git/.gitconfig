@@ -3,10 +3,6 @@
 [include]
   path = ~/.gitconfig.local
 
-[user]
-	# コミット時のユーザー情報
-	# ~/.gitconfig.local 参照
-
 [core]
 	# デフォルトエディタ
 	editor = nvim
