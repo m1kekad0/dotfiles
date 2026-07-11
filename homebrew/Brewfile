@@ -1,0 +1,39 @@
+# Homebrew Bundle で管理する直接インストールのパッケージ一覧
+# 依存パッケージは Homebrew に解決を委ね、このファイルには記載しない。
+
+tap "arthur-ficial/tap"
+tap "manaflow-ai/cmux"
+
+# CLI・開発ツール
+brew "autoconf"
+brew "bat"
+brew "eza"
+brew "fzf"
+brew "gh"
+brew "git-delta"
+brew "go"
+brew "guile"
+brew "lazygit"
+brew "mise"
+brew "neovim"
+brew "pandoc"
+brew "qemu"
+brew "stow"
+brew "telnet"
+brew "tfenv"
+brew "tree-sitter-cli"
+brew "uv"
+
+# GUI アプリケーション・フォント
+cask "antigravity"
+cask "aws-vault-binary"
+cask "cmux"
+cask "docker-desktop"
+cask "font-fira-code-nerd-font"
+cask "font-hack-nerd-font"
+cask "font-hackgen"
+cask "font-jetbrains-mono-nerd-font"
+cask "font-monaspace"
+cask "iterm2"
+cask "utm"
+cask "wezterm"

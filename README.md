@@ -15,6 +15,7 @@ m1kekad0 の個人用 dotfiles リポジトリです。
 | `wezterm/` | `~/.config/wezterm/` | WezTerm 設定（カラースキーム・フォント・キーバインド） |
 | `zsh/` | `~/` | Zsh 設定（`.zshrc`・`.zshenv`、Oh My Zsh / Powerlevel10k） |
 | `git/` | `~/` | Git 設定（`.gitconfig`・`.gitignore_global`） |
+| `homebrew/` | `~/Brewfile` | Homebrew Bundle で管理する開発ツール・GUI アプリ・フォント |
 
 > **Note**: AI コーディングエージェント関連の設定（Claude Code・共通ルール `AGENTS.md` 等）は
 > [ai-agent-config](https://github.com/m1kekad0/ai-agent-config) リポジトリへ分離しました。
@@ -28,6 +29,14 @@ m1kekad0 の個人用 dotfiles リポジトリです。
 ```bash
 # macOS
 brew install stow
+```
+
+### Homebrew パッケージの復元
+
+必要な開発ツール、GUI アプリケーション、フォントをまとめてインストールします。
+
+```bash
+brew bundle install --file=homebrew/Brewfile
 ```
 
 ### インストール
@@ -58,6 +67,8 @@ stow -t ~ -D nvim
 dotfiles/
 ├── CLAUDE.md
 ├── README.md
+├── homebrew/
+│   └── Brewfile             # → ~/Brewfile
 ├── nvim/
 │   └── .config/nvim/          # → ~/.config/nvim/
 │       ├── init.lua
