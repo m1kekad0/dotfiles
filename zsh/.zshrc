@@ -37,6 +37,11 @@ plugins=(
   zsh-fzf-history-search   # fzf を使った履歴検索
 )
 
+# Grok CLI の補完定義ディレクトリ
+# oh-my-zsh.sh 内で実行される compinit より前に fpath へ追加しないと、
+# キャッシュ済み ~/.zcompdump が再利用された際に補完が登録されない
+fpath=(~/.grok/completions/zsh $fpath)
+
 source $ZSH/oh-my-zsh.sh
 
 # ─── パス ─────────────────────────────────────────────────────────────────────
@@ -70,6 +75,5 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # >>> grok installer >>>
 export PATH="$HOME/.grok/bin:$PATH"
-fpath=(~/.grok/completions/zsh $fpath)
-autoload -Uz compinit && compinit -C
+# 補完ディレクトリの fpath 追加は compinit 前に必要なため Oh My Zsh 読込前へ移動済み
 # <<< grok installer <<<
