@@ -34,8 +34,8 @@ brew install stow
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/m1kekad0/dotfiles.git ~/dotfiles
-cd ~/dotfiles
+git clone https://github.com/m1kekad0/dotfiles.git ~/github.com/m1kekad0/dotfiles
+cd ~/github.com/m1kekad0/dotfiles
 
 # 全パッケージを一括展開
 stow -t ~ */
@@ -73,13 +73,9 @@ dotfiles/
 ├── git/
 │   ├── .gitconfig             # → ~/.gitconfig
 │   └── .gitignore_global      # → ~/.gitignore_global
-└── claude/
-    └── .claude/               # → ~/.claude/
-        ├── CLAUDE.md
-        ├── settings.json
-        ├── statusline-command.sh
-        ├── statusline-line2.py
-        └── commands/
+└── lazygit/
+    └── .config/lazygit/       # → ~/.config/lazygit/
+        └── config.yml
 ```
 
 ## 作業ルール
