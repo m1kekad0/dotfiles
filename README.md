@@ -16,6 +16,7 @@ m1kekad0 の個人用 dotfiles リポジトリです。
 | `zsh/` | `~/` | Zsh 設定（`.zshrc`・`.zshenv`、Oh My Zsh / Powerlevel10k） |
 | `git/` | `~/` | Git 設定（`.gitconfig`・`.gitignore_global`） |
 | `claude/` | `~/.claude/` | Claude Code 設定（グローバル指示・hooks・カスタムコマンド） |
+| `agents/` | `~/` | 全コーディングエージェント共通のグローバルルール（`AGENTS.md`） |
 
 ## セットアップ
 
