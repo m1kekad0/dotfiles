@@ -21,13 +21,19 @@ m1kekad0 の個人用 dotfiles リポジトリです。
 
 ### 既存の Powerlevel10k 設定の移行
 
-すでに `~/.p10k.zsh` がある場合は、Stow で `zsh` パッケージを展開する前に内容を確認して退避してください。
-退避後は、このリポジトリの設定との差分を確認し、端末固有の値だけを移行します。
+既存の Zsh 設定を Stow 管理へ移行する場合は、`~/.p10k.zsh` だけでなく `~/.zshrc` と
+`~/.zshenv` も競合します。通常ファイルだけを退避してから展開してください。すでに Stow で
+`zsh` パッケージを展開済みの場合は、この手順は不要です。
 
 ```bash
-mv ~/.p10k.zsh ~/.p10k.zsh.backup
+mkdir -p ~/.dotfiles-backup/zsh
+for file in .zshrc .zshenv .p10k.zsh; do
+  [[ -e "$HOME/$file" && ! -L "$HOME/$file" ]] && mv "$HOME/$file" "$HOME/.dotfiles-backup/zsh/$file"
+done
 stow -t ~ zsh
 ```
+
+展開後は退避した設定とこのリポジトリの設定との差分を確認し、端末固有の値だけを移行します。
 
 ## セットアップ
 
