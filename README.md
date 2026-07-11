@@ -16,6 +16,7 @@ m1kekad0 の個人用 dotfiles リポジトリです。
 | `zsh/` | `~/` | Zsh 設定（`.zshrc`・`.zshenv`、Oh My Zsh / Powerlevel10k） |
 | `git/` | `~/` | Git 設定（`.gitconfig`・`.gitignore_global`） |
 | `homebrew/` | `~/Brewfile` | Homebrew Bundle で管理する開発ツール・GUI アプリ・フォント |
+| `mise/` | `~/.config/mise/` | mise のグローバルなランタイム設定 |
 
 > **Note**: AI コーディングエージェント関連の設定（Claude Code・共通ルール `AGENTS.md` 等）は
 > [ai-agent-config](https://github.com/m1kekad0/ai-agent-config) リポジトリへ分離しました。
@@ -42,6 +43,25 @@ stow -t ~ */
 # 特定パッケージのみ展開
 stow -t ~ nvim
 stow -t ~ zsh
+stow -t ~ mise
+```
+
+### mise のランタイム導入
+
+`mise` をインストール後、設定を展開して次のコマンドを実行すると、グローバル設定で指定したランタイムを導入できます。
+
+```bash
+mise install
+```
+
+プロジェクトごとのバージョン指定は、各プロジェクトの `mise.toml` を優先します。
+
+すでに `~/.config/mise/config.toml` がある場合は、Stow で展開する前に内容を確認して退避してください。
+退避後は既存の設定とこのリポジトリの設定を比較し、必要な項目を統合します。
+
+```bash
+mv ~/.config/mise/config.toml ~/.config/mise/config.toml.backup
+stow -t ~ mise
 ```
 
 ### アンインストール
@@ -71,6 +91,9 @@ dotfiles/
 ├── zsh/
 │   ├── .zshrc                 # → ~/.zshrc
 │   └── .zshenv                # → ~/.zshenv
+├── mise/
+│   └── .config/mise/          # → ~/.config/mise/
+│       └── config.toml
 ├── git/
 │   ├── .gitconfig             # → ~/.gitconfig
 │   └── .gitignore_global      # → ~/.gitignore_global
