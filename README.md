@@ -13,7 +13,7 @@ m1kekad0 の個人用 dotfiles リポジトリです。
 |---|---|---|
 | `nvim/` | `~/.config/nvim/` | Neovim 設定（lazy.nvim / LSP / treesitter） |
 | `wezterm/` | `~/.config/wezterm/` | WezTerm 設定（カラースキーム・フォント・キーバインド） |
-| `zsh/` | `~/` | Zsh 設定（`.zshrc`・`.zshenv`、Oh My Zsh / Powerlevel10k） |
+| `zsh/` | `~/` | Zsh 設定（`.zshrc`・`.zshenv`・`.p10k.zsh`、Oh My Zsh / Powerlevel10k） |
 | `git/` | `~/` | Git 設定（`.gitconfig`・`.gitignore_global`） |
 
 > **Note**: AI コーディングエージェント関連の設定（Claude Code・共通ルール `AGENTS.md` 等）は
@@ -69,7 +69,8 @@ dotfiles/
 │       └── wezterm.lua
 ├── zsh/
 │   ├── .zshrc                 # → ~/.zshrc
-│   └── .zshenv                # → ~/.zshenv
+│   ├── .zshenv                # → ~/.zshenv
+│   └── .p10k.zsh              # → ~/.p10k.zsh
 ├── git/
 │   ├── .gitconfig             # → ~/.gitconfig
 │   └── .gitignore_global      # → ~/.gitignore_global
