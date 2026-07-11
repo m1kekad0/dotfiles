@@ -15,6 +15,7 @@ m1kekad0 の個人用 dotfiles リポジトリです。
 | `wezterm/` | `~/.config/wezterm/` | WezTerm 設定（カラースキーム・フォント・キーバインド） |
 | `zsh/` | `~/` | Zsh 設定（`.zshrc`・`.zshenv`・`.p10k.zsh`、Oh My Zsh / Powerlevel10k） |
 | `git/` | `~/` | Git 設定（`.gitconfig`・`.gitignore_global`） |
+| `homebrew/` | `~/Brewfile` | Homebrew Bundle で管理する開発ツール・GUI アプリ・フォント |
 | `mise/` | `~/.config/mise/` | mise のグローバルなランタイム設定 |
 
 > **Note**: AI コーディングエージェント関連の設定（Claude Code・共通ルール `AGENTS.md` 等）は
@@ -41,12 +42,7 @@ stow -t ~ zsh
 
 ### 前提条件
 
-- [GNU Stow](https://www.gnu.org/software/stow/) がインストールされていること
-
-```bash
-# macOS
-brew install stow
-```
+- [Homebrew](https://brew.sh/) がインストールされていること
 
 ### インストール
 
@@ -54,6 +50,9 @@ brew install stow
 # リポジトリをクローン
 git clone https://github.com/m1kekad0/dotfiles.git ~/github.com/m1kekad0/dotfiles
 cd ~/github.com/m1kekad0/dotfiles
+
+# 開発ツール、GUI アプリケーション、フォントをまとめてインストール
+brew bundle install --file=homebrew/Brewfile
 
 # 全パッケージを一括展開
 stow -t ~ */
@@ -82,6 +81,15 @@ mv ~/.config/mise/config.toml ~/.config/mise/config.toml.backup
 stow -t ~ mise
 ```
 
+### 端末固有の Zsh 設定
+
+トークンや端末ごとの PATH は Git 管理せず、`~/.zshrc.local` に定義します。初回のみ、
+Stow で展開された `~/.zshrc.local.example` をコピーして作成してください。
+
+```bash
+cp ~/.zshrc.local.example ~/.zshrc.local
+```
+
 ### アンインストール
 
 ```bash
@@ -95,6 +103,8 @@ stow -t ~ -D nvim
 dotfiles/
 ├── CLAUDE.md
 ├── README.md
+├── homebrew/
+│   └── Brewfile             # → ~/Brewfile
 ├── nvim/
 │   └── .config/nvim/          # → ~/.config/nvim/
 │       ├── init.lua
@@ -107,7 +117,8 @@ dotfiles/
 ├── zsh/
 │   ├── .zshrc                 # → ~/.zshrc
 │   ├── .zshenv                # → ~/.zshenv
-│   └── .p10k.zsh              # → ~/.p10k.zsh
+│   ├── .p10k.zsh              # → ~/.p10k.zsh
+│   └── .zshrc.local.example   # → ~/.zshrc.local.example
 ├── mise/
 │   └── .config/mise/          # → ~/.config/mise/
 │       └── config.toml

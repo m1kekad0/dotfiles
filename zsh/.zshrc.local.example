@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+# 端末固有の Zsh 設定例
+# このファイルを ~/.zshrc.local としてコピーして使用する。
+# トークンやパスワードなどの秘密情報は Git 管理しない。
+
+# 端末固有の実行ファイルを PATH に追加する場合の例
+# export PATH="$HOME/.local/bin:$PATH"
+
+# 開発用の環境変数を設定する場合の例
+# export EXAMPLE_API_URL="http://localhost:3000"

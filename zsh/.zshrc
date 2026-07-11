@@ -77,3 +77,8 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.grok/bin:$PATH"
 # 補完ディレクトリの fpath 追加は compinit 前に必要なため Oh My Zsh 読込前へ移動済み
 # <<< grok installer <<<
+
+# ─── 端末固有の設定 ────────────────────────────────────────────────────────────
+
+# トークンや端末ごとの PATH は管理対象外の ~/.zshrc.local に定義する。
+[[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
