@@ -24,20 +24,7 @@ m1kekad0 の個人用 dotfiles リポジトリです。
 
 ### 前提条件
 
-- [GNU Stow](https://www.gnu.org/software/stow/) がインストールされていること
-
-```bash
-# macOS
-brew install stow
-```
-
-### Homebrew パッケージの復元
-
-必要な開発ツール、GUI アプリケーション、フォントをまとめてインストールします。
-
-```bash
-brew bundle install --file=homebrew/Brewfile
-```
+- [Homebrew](https://brew.sh/) がインストールされていること
 
 ### インストール
 
@@ -45,6 +32,9 @@ brew bundle install --file=homebrew/Brewfile
 # リポジトリをクローン
 git clone https://github.com/m1kekad0/dotfiles.git ~/github.com/m1kekad0/dotfiles
 cd ~/github.com/m1kekad0/dotfiles
+
+# 開発ツール、GUI アプリケーション、フォントをまとめてインストール
+brew bundle install --file=homebrew/Brewfile
 
 # 全パッケージを一括展開
 stow -t ~ */
