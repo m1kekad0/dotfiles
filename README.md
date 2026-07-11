@@ -57,6 +57,14 @@ mise install
 
 プロジェクトごとのバージョン指定は、各プロジェクトの `mise.toml` を優先します。
 
+すでに `~/.config/mise/config.toml` がある場合は、Stow で展開する前に内容を確認して退避してください。
+退避後は既存の設定とこのリポジトリの設定を比較し、必要な項目を統合します。
+
+```bash
+mv ~/.config/mise/config.toml ~/.config/mise/config.toml.backup
+stow -t ~ mise
+```
+
 ### アンインストール
 
 ```bash
