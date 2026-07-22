@@ -17,6 +17,7 @@ m1kekad0 の個人用 dotfiles リポジトリです。
 | `git/` | `~/` | Git 設定（`.gitconfig`・`.gitignore_global`） |
 | `homebrew/` | `~/Brewfile` | Homebrew Bundle で管理する開発ツール・GUI アプリ・フォント |
 | `mise/` | `~/.config/mise/` | mise のグローバルなランタイム設定 |
+| `herdr/` | `~/.config/herdr/` | herdr の設定（テーマ・キーバインド等） |
 
 > **Note**: AI コーディングエージェント関連の設定（Claude Code・共通ルール `AGENTS.md` 等）は
 > [ai-agent-config](https://github.com/m1kekad0/ai-agent-config) リポジトリへ分離しました。
@@ -62,6 +63,7 @@ stow -t ~ */
 stow -t ~ nvim
 stow -t ~ zsh
 stow -t ~ mise
+stow -t ~ herdr
 ```
 
 ### mise のランタイム導入
@@ -80,6 +82,17 @@ mise install
 ```bash
 mv ~/.config/mise/config.toml ~/.config/mise/config.toml.backup
 stow -t ~ mise
+```
+
+### herdr の既存設定
+
+すでに `~/.config/herdr/config.toml` がある場合は、Stow で展開する前に内容を確認して退避してください。
+`~/.config/herdr/` にはログファイルやソケットなど Git 管理対象外のファイルも生成されるため、
+`config.toml` だけを退避・比較してください。
+
+```bash
+mv ~/.config/herdr/config.toml ~/.config/herdr/config.toml.backup
+stow -t ~ herdr
 ```
 
 ### 端末固有の Zsh 設定
@@ -122,6 +135,9 @@ dotfiles/
 │   └── .zshrc.local.example   # → ~/.zshrc.local.example
 ├── mise/
 │   └── .config/mise/          # → ~/.config/mise/
+│       └── config.toml
+├── herdr/
+│   └── .config/herdr/         # → ~/.config/herdr/
 │       └── config.toml
 ├── git/
 │   ├── .gitconfig             # → ~/.gitconfig
