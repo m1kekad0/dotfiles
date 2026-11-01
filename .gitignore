@@ -1,0 +1,19 @@
+# stow の folding で ~/.claude・~/.agents がリポジトリ内を指してしまった場合に、
+# ツールが生成する認証情報・セッション等を誤ってコミットしないよう許可リスト方式で管理する
+
+# claude: statusline の 3 ファイルのみ管理
+claude/.claude/*
+!claude/.claude/statusline-command-p10k.sh
+!claude/.claude/statusline-command.sh
+!claude/.claude/statusline-line2.py
+
+# agents: 共通 SKILL web-preview のみ管理
+agents/.agents/*
+!agents/.agents/skills/
+agents/.agents/skills/*
+!agents/.agents/skills/web-preview/
+agents/.agents/skills/web-preview/*
+!agents/.agents/skills/web-preview/SKILL.md
+!agents/.agents/skills/web-preview/agents/
+agents/.agents/skills/web-preview/agents/*
+!agents/.agents/skills/web-preview/agents/openai.yaml

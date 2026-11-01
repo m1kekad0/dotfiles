@@ -18,9 +18,11 @@ m1kekad0 の個人用 dotfiles リポジトリです。
 | `homebrew/` | `~/Brewfile` | Homebrew Bundle で管理する開発ツール・GUI アプリ・フォント |
 | `mise/` | `~/.config/mise/` | mise のグローバルなランタイム設定 |
 | `herdr/` | `~/.config/herdr/` | herdr の設定（テーマ・キーバインド等） |
+| `claude/` | `~/.claude/` | Claude Code の statusline スクリプト（`settings.json` は管理しない） |
+| `agents/` | `~/.agents/` | 各エージェント共通の SKILL（`skills/web-preview/`） |
 
-> **Note**: AI コーディングエージェント関連の設定（Claude Code・共通ルール `AGENTS.md` 等）は
-> [ai-agent-config](https://github.com/m1kekad0/ai-agent-config) リポジトリへ分離しました。
+> **Note**: AI コーディングエージェント関連では、Claude Code の statusline と共通 SKILL `web-preview` を
+> 本リポジトリで管理します。権限設定などその他のエージェント設定は端末ローカルで管理します。
 
 ### 既存の Powerlevel10k 設定の移行
 
@@ -57,13 +59,57 @@ cd ~/github.com/m1kekad0/dotfiles
 brew bundle install --file=homebrew/Brewfile
 
 # 全パッケージを一括展開
-stow -t ~ */
+stow --no-folding -t ~ */
 
 # 特定パッケージのみ展開
 stow -t ~ nvim
 stow -t ~ zsh
 stow -t ~ mise
 stow -t ~ herdr
+stow --no-folding -t ~ claude agents
+```
+
+`claude`・`agents` パッケージは必ず `--no-folding` 付きで展開してください。`~/.claude` や `~/.agents` が
+存在しない状態で展開するとディレクトリごとシンボリックリンクになり、ツールが生成する認証情報や
+セッションがリポジトリ内に書き込まれるためです。一括展開もこれを防ぐため `--no-folding` を付けています
+（他パッケージもファイル単位のリンクになるため、パッケージにファイルを追加した際は再度 `stow` を実行します）。
+すでにディレクトリ単位のリンクで展開済みのパッケージは、`stow --no-folding -t ~ -R <package>` で張り直せます。
+その際、folding 状態の間にリポジトリ内（`claude/.claude/` 等）へ生成された不要ファイルがあれば、実行前にリポジトリ外へ退避してください。
+
+### Claude Code の statusline
+
+`~/.claude/settings.json` は権限設定や hooks を含むため本リポジトリでは管理しません。
+`claude` パッケージを展開後、端末ローカルの `settings.json` に次の項目を手で追記してください。
+
+```json
+"statusLine": {
+  "type": "command",
+  "command": "bash $HOME/.claude/statusline-command-p10k.sh"
+}
+```
+
+Powerline 記号を使わないシンプル版を使う場合は `statusline-command.sh` を指定します。
+依存ツールは次のとおりです。
+
+- `jq`・`python3`（両スクリプト共通。2 行目は `statusline-line2.py` で描画）
+- Nerd Font（p10k 版のみ。区切り記号の表示に必要）
+
+### 共通 SKILL web-preview の Claude Code への登録
+
+`agents` パッケージは `~/.agents/skills/web-preview/` に展開されます。Claude Code からは
+`~/.claude/skills/` 配下の相対シンボリックリンクで参照します。
+
+既存の `~/.claude/skills/web-preview` がディレクトリ（またはディレクトリへのリンク）だと、`ln -s` は
+その中にリンクを作ってしまいます。作成前に存在を確認し、存在する場合は中身を確認して退避してから再実行してください
+（`ln -sf` も同様にディレクトリの中にリンクを作るため使わないでください）。
+
+```bash
+mkdir -p ~/.claude/skills
+if [ -e ~/.claude/skills/web-preview ] || [ -L ~/.claude/skills/web-preview ]; then
+  echo "~/.claude/skills/web-preview が既に存在します。中身を確認して退避してから再実行してください。"
+else
+  ln -s ../../.agents/skills/web-preview ~/.claude/skills/web-preview
+fi
 ```
 
 ### mise のランタイム導入
@@ -117,6 +163,7 @@ stow -t ~ -D nvim
 dotfiles/
 ├── CLAUDE.md
 ├── README.md
+├── .gitignore                 # claude/・agents/ の管理対象外ファイルを除外
 ├── homebrew/
 │   └── Brewfile             # → ~/Brewfile
 ├── nvim/
@@ -142,9 +189,19 @@ dotfiles/
 ├── git/
 │   ├── .gitconfig             # → ~/.gitconfig
 │   └── .gitignore_global      # → ~/.gitignore_global
-└── lazygit/
-    └── .config/lazygit/       # → ~/.config/lazygit/
-        └── config.yml
+├── lazygit/
+│   └── .config/lazygit/       # → ~/.config/lazygit/
+│       └── config.yml
+├── claude/
+│   └── .claude/               # → ~/.claude/（--no-folding で展開）
+│       ├── statusline-command-p10k.sh
+│       ├── statusline-command.sh
+│       └── statusline-line2.py
+└── agents/
+    └── .agents/skills/        # → ~/.agents/skills/（--no-folding で展開）
+        └── web-preview/
+            ├── SKILL.md
+            └── agents/openai.yaml
 ```
 
 ## 作業ルール

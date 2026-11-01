@@ -1,0 +1,4 @@
+interface:
+  display_name: "Web画面プレビュー"
+  short_description: "ローカルWeb画面を操作して表示とエラーを目視検証"
+  default_prompt: "$web-preview を使用して、現在の変更が影響するローカルWeb画面を安全に目視確認してください。"

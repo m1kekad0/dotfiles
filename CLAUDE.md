@@ -12,11 +12,15 @@ m1kekad0 の個人用 dotfiles を管理するリポジトリです。
 **GNU Stow** を使用してシンボリックリンクを管理する。
 
 ```bash
-# 全パッケージを一括で展開
-stow -t ~ */
+# 全パッケージを一括で展開（folding 防止のため --no-folding を付ける）
+stow --no-folding -t ~ */
 
 # 特定パッケージのみ展開
 stow -t ~ nvim
+
+# claude・agents は必ず --no-folding で展開する
+# （~/.claude・~/.agents がリポジトリ内を指し、認証情報等が書き込まれるのを防ぐ）
+stow --no-folding -t ~ claude agents
 
 # リンクを削除（アンストール）
 stow -t ~ -D nvim
@@ -50,11 +54,18 @@ dotfiles/
 ├── git/                     # Git 設定パッケージ
 │   ├── .gitconfig           # → ~/.gitconfig にリンク
 │   └── .gitignore_global    # → ~/.gitignore_global にリンク
-└── tmux/                    # tmux 設定パッケージ
-    └── .config/
-        └── tmux/            # → ~/.config/tmux/ にリンク
-            └── tmux.conf
+├── tmux/                    # tmux 設定パッケージ
+│   └── .config/
+│       └── tmux/            # → ~/.config/tmux/ にリンク
+│           └── tmux.conf
+├── claude/                  # Claude Code statusline パッケージ（settings.json は管理しない）
+│   └── .claude/             # → ~/.claude/ 配下にファイル単位でリンク
+└── agents/                  # 共通 SKILL パッケージ
+    └── .agents/skills/      # → ~/.agents/skills/ 配下にファイル単位でリンク
+        └── web-preview/
 ```
+
+`claude/.claude/`・`agents/.agents/` は `.gitignore` の許可リストで管理する。ファイルを追加する際は `.gitignore` にも `!` で追記すること。
 
 ## 作業ルール
 
